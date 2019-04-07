@@ -1,4 +1,6 @@
 # vue-tdd
+~~WORK IN PROGRESS~~
+
 Simple CRUD form for testing TDD approach
 
 ## Project setup
