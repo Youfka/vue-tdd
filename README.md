@@ -1,4 +1,5 @@
 # vue-tdd
+Simple CRUD form for testing TDD approach
 
 ## Project setup
 ```
@@ -30,5 +31,5 @@ npm run lint
 npm run test:e2e
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
