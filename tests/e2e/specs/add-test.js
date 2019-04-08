@@ -5,7 +5,7 @@ describe('Adding a hero', () => {
     cy.get('[data-test=add]').click()
 
     cy.get('.md-dialog-container').should('be.visible')
-    cy.get('[data-test=name]').type('Steve')
+    cy.get('[data-test=name]').type('Steeve')
     cy.get('[data-test=surname]').type('Rogers')
     cy.get('[data-test=pseudo]').type('Captain America')
     cy.get('[type=submit]').click()

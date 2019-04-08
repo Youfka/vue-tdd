@@ -1,6 +1,6 @@
 <template>
     <md-dialog :md-active.sync="modal">
-        <form novalidate class="md-layout" @submit.prevent="validateUser">
+        <form novalidate class="md-layout" @submit.prevent="">
             <div class="field md-title p-top md-layout-item md-size-90">{{title}}</div>
             <template v-if="type!='delete'">
                 <md-field class="field">
@@ -18,7 +18,7 @@
                 </md-field>
             </template>
             <md-dialog-actions class="p-top">
-                <md-button type="submit" class="md-primary" @click="setActive(false)">OK</md-button>
+                <md-button type="submit" class="md-primary" @click="save()">OK</md-button>
                 <md-button class="md-primary" @click="setActive(false)">Cancel</md-button>
             </md-dialog-actions>
         </form>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     data: () => ({
       name: null,
@@ -63,10 +64,18 @@ export default {
             this.$store.commit('SET_MODAL', active);
         },
         save(){
+            this.setActive(false);
+            let str = {"name":"Bruce","surname":"Benner","pseudo":"Hulk"};
             if(this.type=='add'){
-                
+            axios.post('http://localhost:3000/heroes/add', str)
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
             }
-        }
+        },
     }
 }
 </script>

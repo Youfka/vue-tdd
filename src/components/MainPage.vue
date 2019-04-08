@@ -64,7 +64,7 @@ export default {
         this.hero = this.heroes[id];
         this.modal_type = type;
         this.$store.commit('SET_MODAL', active);
-    }
+    },
   }
 };
 </script>
