@@ -5,16 +5,15 @@
             <template v-if="type!='delete'">
                 <md-field class="field">
                     <label>Name</label>
-                    <md-input :value="hero.name" data-test="name"></md-input>
+                    <md-input :value="hero.name" data-test="name" @change="getName($event)"></md-input>
                 </md-field>   
                 <md-field class="field">
                     <label>Surname</label>
-                    <md-input :value="hero.surname" data-test="surname"></md-input>
+                    <md-input :value="hero.surname" data-test="surname" @change="getSurname($event)"></md-input>
                 </md-field>  
-                <md-field :class="messageClass" class="field">
-                    <label>Pseudo</label>
-                    <md-input :value="hero.pseudo" data-test="pseudo"></md-input>
-                    <span class="md-error">There is an error</span>
+                <md-field class="field">
+                    <label>Pseudonym</label>
+                    <md-input :value="hero.pseudo" data-test="pseudo" @change="getPseudo($event)"></md-input>
                 </md-field>
             </template>
             <md-dialog-actions class="p-top">
@@ -29,10 +28,11 @@
 import axios from 'axios';
 export default {
     data: () => ({
-      name: null,
-      surname: null,
-      required: null,
-      hasMessages: false
+      newHero: {
+          name: '',
+          surname: '',
+          pseudo: ''
+      }
     }),
     props: {
         type: {
@@ -63,12 +63,21 @@ export default {
         setActive(active) {
             this.$store.commit('SET_MODAL', active);
         },
+        getName(ev){
+            this.newHero.name = ev.target.value;
+        },
+        getSurname(ev){
+            this.newHero.surname = ev.target.value;
+        },
+        getPseudo(ev){
+            this.newHero.pseudo = ev.target.value;
+        },
         save(){
             this.setActive(false);
-            let str = {"name":"Bruce","surname":"Benner","pseudo":"Hulk"};
             if(this.type=='add'){
-            axios.post('http://localhost:3000/heroes/add', str)
+            axios.post('http://localhost:3000/heroes/add', this.newHero)
             .then((response) => {
+                this.$store.commit('ADD_NEW_HERO',  this.newHero);
                 console.log(response);
             })
             .catch((error) => {

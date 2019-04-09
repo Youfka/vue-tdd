@@ -8,6 +8,11 @@ Simple CRUD form for testing TDD approach
 npm install
 ```
 
+### Run server
+```
+npm run server
+```
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve

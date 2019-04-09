@@ -1,6 +1,5 @@
 <template>
   <div class="wrap md-layout md-alignment-center-center">
-   
       <h1 class="md-display-2 m-title">Superheroes</h1>
       <md-button class="md-fab green" @click="setActive(true, 'add')" data-test="add">
         <md-icon>add</md-icon>
@@ -11,7 +10,7 @@
         <md-table-head md-numeric>ID</md-table-head>
         <md-table-head>Name</md-table-head>
         <md-table-head>Surname</md-table-head>
-        <md-table-head>Pseudo</md-table-head>
+        <md-table-head>Pseudonym</md-table-head>
         <md-table-head></md-table-head>
       </md-table-row>
       <md-table-row v-for="(hero, i) in heroes" :key="i">
@@ -46,15 +45,18 @@ export default {
     return {
       showDialog: false,
       modal: this.$store.getters.modal,
-      heroes: [],
+      heroes: this.$store.getters.heroes,
       modal_type: '',
       hero: {}
     }
   },
-  mounted() {
-    axios
+  async mounted() {
+    await axios
       .get('http://localhost:3000/heroes')
-      .then(response => (this.heroes = response.data))
+      .then(response => {
+        this.$store.commit('SET_HEROES',  response.data);
+        this.heroes = response.data
+      })
       .catch(error => {
         console.log(error);
       });
