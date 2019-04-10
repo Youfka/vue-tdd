@@ -29,7 +29,7 @@
       </md-table-row>
     </md-table>
     </div>
-     <Modal :type="modal_type" :hero="hero || {}" ></Modal>
+     <Modal :type="modal_type" :hero="hero || {}" :hero_id="hero_id || 0"></Modal>
   </div>
 </template>
 
@@ -47,7 +47,8 @@ export default {
       modal: this.$store.getters.modal,
       heroes: this.$store.getters.heroes,
       modal_type: '',
-      hero: {}
+      hero: {},
+      hero_id: 0
     }
   },
   async mounted() {
@@ -64,6 +65,7 @@ export default {
   methods: {
     setActive(active, type, id){
         this.hero = this.heroes[id];
+        this.hero_id = id;
         this.modal_type = type;
         this.$store.commit('SET_MODAL', active);
     },

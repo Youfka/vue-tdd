@@ -21,6 +21,10 @@ export default new Vuex.Store({
     },
     ADD_NEW_HERO(state, value) {
       state.heroes.push(value);
+    },
+    EDIT_HERO(state, value){
+      let {id, hero} = value;
+      state.heroes[id] = hero;
     }
   },
   actions: {

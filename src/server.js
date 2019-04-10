@@ -32,6 +32,7 @@ app.post('/heroes/add', (req, res, next) => {
 });
 app.put('/heroes/:id', function (req, res) {
     let id = req.id;
+    id = _.extend(id, req.body);
     let json = JSON.stringify(heroes);
     fs.readFile('./src/mock data/heroes.json', 'utf8', function readFileCallback(err, data){
          if (err){
