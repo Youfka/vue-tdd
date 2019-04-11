@@ -6,10 +6,11 @@ const bodyParser = require("body-parser");
 let heroes = require('./mock data/heroes.json');
 
 app.use(cors());
-// app.use(bodyParser.urlencoded({
-//     extended: true
-//   }));
+app.use(bodyParser.urlencoded({
+    extended: true
+  }));
 app.use(express.json());
+
 app.get('/heroes', (req, res, next) => {
     res.json(heroes);
 }); 
@@ -27,12 +28,11 @@ app.post('/heroes/add', (req, res, next) => {
             console.log('The file has been saved!');
           }); 
     }});
-    console.log(req.body, 'req');
     res.send('success');
 });
 app.put('/heroes/:id', function (req, res) {
-    let id = req.id;
-    id = _.extend(id, req.body);
+    console.log(req.params.id, 'id');
+    let id = req.params.id;
     let json = JSON.stringify(heroes);
     fs.readFile('./src/mock data/heroes.json', 'utf8', function readFileCallback(err, data){
          if (err){

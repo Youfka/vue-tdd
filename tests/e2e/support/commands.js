@@ -25,10 +25,8 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 Cypress.Commands.add(
     'selectNth',
-    { prevSubject: 'element' },
-    (subject, pos) => {
-      cy.wrap(subject)
-        .children(subject)
+    (subject, pos) => { 
+      cy.get(subject)
         .eq(pos)
     }
   )

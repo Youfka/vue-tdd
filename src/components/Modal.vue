@@ -4,7 +4,7 @@
             <div class="field md-title p-top md-layout-item md-size-90">{{title}}</div>
             <template v-if="type!='delete'">
                 <md-field class="field">
-                    <label>Name</label> {{hero_id}}
+                    <label>Name</label>
                     <md-input :value="hero.name" data-test="name" @change="getName($event)"></md-input>
                 </md-field>   
                 <md-field class="field">
@@ -91,7 +91,7 @@ export default {
                     id: this.hero_id,
                     hero: this.newHero,
                 }
-                axios.post('http://localhost:3000/heroes/'+this.hero_id, this.hero_id)
+                axios.put('http://localhost:3000/heroes/'+this.hero_id, this.newHero)
                 .then((response) => {
                     this.$store.commit('EDIT_HERO',  obj);
                     console.log(response);

@@ -24,6 +24,7 @@ export default new Vuex.Store({
     },
     EDIT_HERO(state, value){
       let {id, hero} = value;
+      console.log(state.heroes[id], hero);
       state.heroes[id] = hero;
     }
   },

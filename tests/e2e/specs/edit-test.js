@@ -3,7 +3,7 @@ describe('Adding a hero', () => {
     it('edit', () => {
       cy.visit('/')
       cy.request('GET', 'http://localhost:3000/heroes')
-      cy.get('tbody').selectNth(3).within(() => {
+      cy.get('tbody').selectNth('tr', 3).within(() => {
         cy.get('[data-test=edit]').click()
       })
       cy.get('.md-dialog-container').should('be.visible')
@@ -16,10 +16,10 @@ describe('Adding a hero', () => {
     //       expect(response.body).to.eq("success")
     //     })
       cy.get('.md-dialog-container').should('not.be.visible')
-      cy.get('tbody').selectNth(3).within(() => {
-        cy.get('td').selectNth(1).contains('Nick')
-        cy.get('td').selectNth(2).contains('Fury')
-        cy.get('td').selectNth(3).contains('Fury1')
+      cy.get('tbody').selectNth('tr', 3).within(() => {
+        cy.get('td').eq(1).contains('Nick')
+        cy.get('td').eq(2).contains('Fury')
+        cy.get('td').eq(3).contains('Fury1')
       })
     });
   });
