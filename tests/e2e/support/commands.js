@@ -29,4 +29,14 @@ Cypress.Commands.add(
       cy.get(subject)
         .eq(pos)
     }
+  //   'selectNth',
+  // { prevSubject: 'element' },
+  // (subject, pos) => {
+  //   cy.wrap(subject)
+  //     .children('option')
+  //     .eq(pos)
+  //     .then(e => {
+  //       cy.wrap(subject).select(e.val())
+  //     })
+  // }
   )

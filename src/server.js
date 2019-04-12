@@ -49,6 +49,25 @@ app.put('/heroes/:id', function (req, res) {
     console.log(req.body, 'req');
     res.send('success');
 });
+app.delete('/heroes/:id', function (req, res) {
+    console.log(req.params.id, 'id');
+    let id = req.params.id;
+    let json = JSON.stringify(heroes);
+    fs.readFile('./src/mock data/heroes.json', 'utf8', function readFileCallback(err, data){
+         if (err){
+            console.log(err);
+        } else {
+        let heroes = JSON.parse(data); 
+        heroes.splice(id, 1); 
+        json = JSON.stringify(heroes);
+        fs.writeFile('./src/mock data/heroes.json', json, 'utf8', (err) => {
+            if (err) throw err;
+            console.log('The file has been edited!');
+          }); 
+    }});
+    console.log(req.body, 'req');
+    res.send('success');
+});
 
 app.listen(3000, () => {
     console.log('Server running on port 3000');
