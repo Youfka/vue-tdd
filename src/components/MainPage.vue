@@ -1,6 +1,6 @@
 <template>
   <div class="wrap md-layout md-alignment-center-center">
-      <h1 class="md-display-2 m-title">Superheroes</h1>
+      <h1 class="md-display-2 m-title">Superheroes</h1> {{heroes}}
       <md-button class="md-fab green" @click="setActive(true, 'add')" data-test="add">
         <md-icon>add</md-icon>
       </md-button>
@@ -29,13 +29,14 @@
       </md-table-row>
     </md-table>
     </div>
-     <Modal :type="modal_type" :hero="hero || {}" :hero_id="hero_id || 0"></Modal>
+     <Modal :type="modal_type" :hero="current_hero || {}" :hero_id="hero_id || 0"></Modal>
   </div>
 </template>
 
 <script>
 import Modal from './Modal.vue';
 import axios from 'axios';
+import { mapGetters, mapMutations } from 'vuex';
 export default {
   name: 'MainPage',
   components: {
@@ -45,29 +46,32 @@ export default {
     return {
       showDialog: false,
       modal: this.$store.getters.modal,
-      heroes: this.$store.getters.heroes,
       modal_type: '',
-      hero: {},
+      current_hero: {},
       hero_id: 0
     }
+  },
+  computed: { 
+    ...mapGetters(['heroes']), 
   },
   async mounted() {
     await axios
       .get('http://localhost:3000/heroes')
       .then(response => {
-        this.$store.commit('SET_HEROES',  response.data);
-        this.heroes = response.data
+        console.log(response.data);
+        this.SET_HEROES(response.data);
       })
       .catch(error => {
         console.log(error);
       });
   },
   methods: {
+    ...mapMutations(['SET_HEROES', 'SET_MODAL']), 
     setActive(active, type, id){
-        this.hero = this.heroes[id];
+        this.current_hero = this.heroes[id];
         this.hero_id = id;
         this.modal_type = type;
-        this.$store.commit('SET_MODAL', active);
+        this.SET_MODAL(active);
     },
   }
 };

@@ -99,6 +99,15 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
+            } else if(this.type=='delete'){
+                axios.delete('http://localhost:3000/heroes/'+this.hero_id)
+                .then((response) => {
+                    this.$store.commit('DELETE_HERO',  this.hero_id);
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
             }
         },
     }

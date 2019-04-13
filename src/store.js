@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     Modal: false,
-    heroes: []
+    heroes: [{}]
   },
   getters: {
     modal: ({ Modal }) => Modal,
@@ -24,8 +24,11 @@ export default new Vuex.Store({
     },
     EDIT_HERO(state, value){
       let {id, hero} = value;
-      console.log(state.heroes[id], hero);
       state.heroes[id] = hero;
+      console.log(state.heroes);
+    },
+    DELETE_HERO(state, id){
+      state.heroes.splice(id, 1);
     }
   },
   actions: {

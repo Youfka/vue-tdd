@@ -28,12 +28,13 @@ app.post('/heroes/add', (req, res, next) => {
             console.log('The file has been saved!');
           }); 
     }});
-    res.send('success');
+    res.send('successfully added '+req.body.pseudo);
 });
 app.put('/heroes/:id', function (req, res) {
     console.log(req.params.id, 'id');
     let id = req.params.id;
     let json = JSON.stringify(heroes);
+    res.send(heroes[id].pseudo + ' edited');
     fs.readFile('./src/mock data/heroes.json', 'utf8', function readFileCallback(err, data){
          if (err){
             console.log(err);
@@ -50,9 +51,10 @@ app.put('/heroes/:id', function (req, res) {
     res.send('success');
 });
 app.delete('/heroes/:id', function (req, res) {
-    console.log(req.params.id, 'id');
     let id = req.params.id;
     let json = JSON.stringify(heroes);
+    
+    res.send(heroes[id].pseudo + ' deleted');
     fs.readFile('./src/mock data/heroes.json', 'utf8', function readFileCallback(err, data){
          if (err){
             console.log(err);
@@ -62,11 +64,9 @@ app.delete('/heroes/:id', function (req, res) {
         json = JSON.stringify(heroes);
         fs.writeFile('./src/mock data/heroes.json', json, 'utf8', (err) => {
             if (err) throw err;
-            console.log('The file has been edited!');
-          }); 
+            console.log('Hero deleted');
+        }); 
     }});
-    console.log(req.body, 'req');
-    res.send('success');
 });
 
 app.listen(3000, () => {
