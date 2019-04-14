@@ -5,8 +5,6 @@ describe('Edit a hero', () => {
       cy.request('GET', 'http://localhost:3000/heroes').then((response) => {
         expect(response.status).to.eq(200)
         expect(response.body).to.have.length(3)
-        expect(response).to.have.property('headers')
-        expect(response).to.have.property('duration')
       })
       cy.wait(500)
       cy.get('tbody>tr').eq(3).within(() => {

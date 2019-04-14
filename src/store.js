@@ -22,9 +22,9 @@ export default new Vuex.Store({
     ADD_NEW_HERO(state, value) {
       state.heroes.push(value);
     },
-    EDIT_HERO(state, value){
+    EDIT_HERO(state, value){ 
       let {id, hero} = value;
-      state.heroes[id] = hero;
+      state.heroes.splice(id, 1, hero);
       console.log(state.heroes);
     },
     DELETE_HERO(state, id){

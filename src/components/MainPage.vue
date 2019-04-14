@@ -1,10 +1,10 @@
 <template>
   <div class="wrap md-layout md-alignment-center-center">
-      <h1 class="md-display-2 m-title">Superheroes</h1> {{heroes}}
+      <h1 class="md-display-2 m-title">Superheroes</h1> 
       <md-button class="md-fab green" @click="setActive(true, 'add')" data-test="add">
         <md-icon>add</md-icon>
       </md-button>
-    <div class="md-layout-item md-size-90">
+    <div class="md-layout-item md-size-100">
     <md-table>
       <md-table-row>
         <md-table-head md-numeric>ID</md-table-head>
@@ -87,6 +87,21 @@ html, body, .wrap {
   background-color: #00C853!important;
 }
 .m-title {
-  margin: 20px 10px 30px 0;
+  margin: 20px 10px 30px 10px;
+   @media(max-width: 800px){
+     margin-bottom: 10px;
+   }
+}
+.md-button+.md-button {
+    margin-left: 8px;
+}
+.wrap {
+  padding: 30px;
+  @media(max-width: 800px){
+    padding: 0 0 30px;
+    .md-table {
+      margin-top: 20px;
+    }
+  }
 }
 </style>
