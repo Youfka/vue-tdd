@@ -2,12 +2,12 @@ describe('Edit a hero', () => {
     
     it('edit', () => {
       cy.visit('/')
+      cy.server({ delay: 500 })
       cy.request('GET', 'http://localhost:3000/heroes').then((response) => {
         expect(response.status).to.eq(200)
         expect(response.body).to.have.length(3)
       })
-      cy.wait(500)
-      cy.get('tbody>tr').eq(3).within(() => {
+      cy.get('tbody>tr', {timeout: 3000}).eq(3).within(() => {
         cy.get('[data-test=edit]').click()
       })
       cy.get('.md-dialog-container').should('be.visible')

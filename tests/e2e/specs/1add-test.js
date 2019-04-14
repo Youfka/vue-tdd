@@ -1,6 +1,7 @@
 describe('Add a hero', () => {
   it('add', () => {
     cy.visit('/')
+    cy.server()
     cy.request('GET', 'http://localhost:3000/heroes').then((response) => {
       expect(response.status).to.eq(200)
       expect(response.body).to.have.length(2)
