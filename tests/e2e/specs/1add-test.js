@@ -8,7 +8,6 @@ describe('Add a hero', () => {
       expect(response).to.have.property('headers')
       expect(response).to.have.property('duration')
     })
-    cy.wait(500)
     cy.get('tr.md-table-row').should('have.length', 3)
     cy.get('[data-test=add]').click()
 
@@ -18,7 +17,6 @@ describe('Add a hero', () => {
     cy.get('[data-test=pseudo]').type('Captain America')
     cy.get('[type=submit]').click()
     cy.get('.md-dialog-container').should('not.be.visible')
-    cy.wait(500)
     cy.get('tr.md-table-row').should('have.length', 4)
   });
 });
