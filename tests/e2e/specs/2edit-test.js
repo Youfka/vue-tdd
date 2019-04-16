@@ -10,6 +10,7 @@ describe('Edit a hero', () => {
       cy.get('[data-test=surname]').clear().type('Benner')
       cy.get('[data-test=pseudo]').clear().type('Hulk')
       cy.get('[type=submit]').click()
+      
       cy.get('.md-dialog-container').should('not.be.visible')
       cy.get('tbody>tr').eq(3).within(() => {
         cy.get('td').eq(1).contains('Bruce')
