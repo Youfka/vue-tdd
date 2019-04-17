@@ -2,7 +2,8 @@ describe('Edit a hero', () => {
     
     it('edit', () => {
       cy.visit('/')
-      cy.get('tbody>tr').should('have.length', 4).eq(3).within(() => {
+      cy.wait(500)
+      cy.get('tr.md-table-row').should('have.length', 4).eq(3).within(() => {
         cy.get('[data-test=edit]').click()
       })
       cy.get('.md-dialog-container').should('be.visible')
