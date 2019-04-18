@@ -8,12 +8,9 @@ describe('My First Test', () => {
     cy.request('GET', 'http://localhost:3000/heroes').then((response) => {
       expect(response.status).to.eq(200)
       expect(response.body).to.have.length(2)
-      cy.wrap(response.body).should('be.a', 'Array').and('deep.eq', [
-        {"name":"Tony","surname":"Stark","pseudo":"Iron Man"},
-        {"name":"Natasha","surname":"Romanoff","pseudo":"Black Widow"}
-      ])
+      cy.wrap(response.body).should('be.a', 'Array')
       cy.wrap(response.body).each((value, index)=>{
-        value.should('be.a', 'Object')
+        cy.wrap(value).should('be.a', 'Object')
       })
     })
   });
