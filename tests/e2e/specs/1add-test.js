@@ -1,7 +1,11 @@
 describe('Add a hero', () => {
-  it('check heroes number before adding', () => {
+  let rows;
+  it('visit root page', () => {
     cy.visit('/')
-    cy.get('tr.md-table-row').should('have.length', 3)
+    cy.wait(500)
+    // cy.get('tr.md-table-row').should('have.length', 3)
+    cy.get('tr.md-table-row').its('length').should('be.gt', 2)
+    rows = document.querySelectorAll('.md-table-row').length
   });
   it('add a hero', () => {
     cy.get('[data-test=add]').click()
@@ -13,6 +17,6 @@ describe('Add a hero', () => {
     cy.get('.md-dialog-container').should('not.be.visible')
   });
   it('check heroes number after adding', () => {
-    cy.get('tr.md-table-row').should('have.length', 4)
+    cy.get('tr.md-table-row').should('have.length', rows+1)
   });
 });
