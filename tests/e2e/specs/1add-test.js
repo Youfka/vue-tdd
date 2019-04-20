@@ -1,11 +1,11 @@
 describe('Add a hero', () => {
   let rows;
-  it('visit root page', () => {
+  it('visit root page and check elements size', () => {
     cy.visit('/')
-    cy.wait(500)
-    // cy.get('tr.md-table-row').should('have.length', 3)
     cy.get('tr.md-table-row').its('length').should('be.gt', 2)
-    rows = document.querySelectorAll('.md-table-row').length
+    cy.get('tr.md-table-row').its('length').then((size)=>{
+      rows = size;
+    })
   });
   it('add a hero', () => {
     cy.get('[data-test=add]').click()
