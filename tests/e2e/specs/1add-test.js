@@ -4,6 +4,7 @@ describe('Add a hero', () => {
     cy.visit('/')
     cy.get('tr.md-table-row').its('length').should('be.gt', 2)
     cy.get('tr.md-table-row').its('length').then((size)=>{
+      console.log(size);
       rows = size;
     })
   });

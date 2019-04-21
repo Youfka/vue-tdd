@@ -7,7 +7,7 @@ describe('My First Test', () => {
     cy.server()
     cy.request('GET', 'http://localhost:3000/heroes').then((response) => {
       expect(response.status).to.eq(200)
-      expect(response.body).to.have.length(2)
+      cy.wrap(response.body).its('length').should('be.gt', 1)
       cy.wrap(response.body).should('be.a', 'Array')
       cy.wrap(response.body).each((value, index)=>{
         cy.wrap(value).should('be.a', 'Object')
