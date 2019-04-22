@@ -2,7 +2,8 @@ describe('Edit a hero', () => {
     it('check table rows and click on 3', () => {
       cy.visit('/')
       cy.wait(500)
-      cy.get('tr.md-table-row').should('have.length', 4).eq(3).within(() => {
+      cy.get('tr.md-table-row').its('length').should('be.gt', 3)
+      cy.get('tr.md-table-row').eq(3).within(() => {
         cy.get('[data-test=edit]').click()
       })
     });

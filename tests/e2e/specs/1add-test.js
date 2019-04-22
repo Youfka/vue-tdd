@@ -2,6 +2,7 @@ describe('Add a hero', () => {
   let rows;
   it('visit root page and check elements size', () => {
     cy.visit('/')
+    cy.wait(500)
     cy.get('tr.md-table-row').its('length').should('be.gt', 2)
     cy.get('tr.md-table-row').its('length').then((size)=>{
       console.log(size);

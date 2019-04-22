@@ -2,12 +2,13 @@ describe('Delete a hero', () => {
     let rows;
     it('check heroes number before deleting', () => {
       cy.visit('/')
+      cy.wait(500)
       cy.get('tr.md-table-row').its('length').should('be.gt', 3)
       cy.get('tr.md-table-row').its('length').then((size)=>{
         rows = size;
       })
     });
-    it('delete', () => {
+    it('delete 3rd item', () => {
       cy.get('tbody>tr').eq(3).within(() => {
         cy.get('[data-test=delete]').click()
       })
